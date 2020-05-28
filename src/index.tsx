@@ -1,14 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Pages from './Pages';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import Pages from "./Pages";
+import * as serviceWorker from "./serviceWorker";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/es/locale/zh_CN";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Pages />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <ConfigProvider locale={zhCN}>
+      <Pages />
+    </ConfigProvider>
+  </Provider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

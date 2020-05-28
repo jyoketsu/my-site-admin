@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import routers from "./index";
 
 export default function Routes() {
@@ -13,6 +13,7 @@ export default function Routes() {
           path={r.path}
         />
       ))}
+      <Redirect to="/404" />
     </Switch>
   );
 }

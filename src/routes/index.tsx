@@ -1,5 +1,5 @@
 import React from "react";
-import { Spin } from "antd";
+import Loading from "../components/common/Loading";
 import Loadable from "react-loadable";
 import {
   HomeOutlined,
@@ -12,10 +12,9 @@ let config = [
     name: "首页",
     path: "/home",
     exact: true,
-    isMenu: true,
     component: Loadable({
       loader: () => import("../components/dashboard/Dashboard"),
-      loading: () => <Spin />,
+      loading: () => <Loading />,
     }),
     icon: <HomeOutlined />,
   },
@@ -23,10 +22,9 @@ let config = [
     name: "文章管理",
     path: "/home/article",
     exact: false,
-    isMenu: true,
     component: Loadable({
-      loader: () => import("../components/article/Articles"),
-      loading: () => <Spin />,
+      loader: () => import("../components/article/Index"),
+      loading: () => <Loading />,
     }),
     icon: <FileWordOutlined />,
   },
@@ -34,10 +32,9 @@ let config = [
     name: "用户管理",
     path: "/home/user",
     exact: false,
-    isMenu: true,
     component: Loadable({
       loader: () => import("../components/user/User"),
-      loading: () => <Spin />,
+      loading: () => <Loading />,
     }),
     icon: <UserOutlined />,
   },
