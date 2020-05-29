@@ -5,7 +5,7 @@ import Routes from "./routes/Routes";
 import { Link, useLocation } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import DocumentTitle from "react-document-title";
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 function App() {
   let location = useLocation();
@@ -53,12 +53,15 @@ function App() {
             className="site-layout-sub-header-background"
             style={{ padding: 0 }}
           ></Header>
-          <Content style={{ margin: "24px 16px 0", minHeight: "unset" }}>
+          <Content
+            style={{
+              margin: "24px 16px 0",
+              minHeight: "unset",
+              position: "relative",
+            }}
+          >
             <Routes />
           </Content>
-          <Footer style={{ textAlign: "center", padding: "15px 50px" }}>
-            Site Admin ©2020 Created by Ketsu Jyo
-          </Footer>
         </Layout>
       </Layout>
     </DocumentTitle>

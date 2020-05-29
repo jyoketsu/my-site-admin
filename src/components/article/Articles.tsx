@@ -6,6 +6,7 @@ import api from "../../util/api";
 import { GET_ARTICLES } from "../../store/types";
 import { PageHeader, Table, Button, Space, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import moment from "moment";
 const { confirm } = Modal;
 
 export default function Articles() {
@@ -46,11 +47,13 @@ export default function Articles() {
       title: "创建时间",
       dataIndex: "createTime",
       key: "createTime",
+      render: (value: string) => moment(value).format("YYYY年MM月DD日"),
     },
     {
       title: "更新时间",
       dataIndex: "updateTime",
       key: "updateTime",
+      render: (value: string) => moment(value).format("YYYY年MM月DD日"),
     },
     {
       title: "操作",

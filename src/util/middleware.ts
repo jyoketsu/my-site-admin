@@ -6,6 +6,7 @@ import {
   LOGOUT,
   REGISTER,
 } from "../store/types";
+import { message } from "antd";
 
 const promiseMiddleware = (store: any) => (next: any) => (action: any) => {
   if (isPromise(action.payload)) {
@@ -33,6 +34,7 @@ const promiseMiddleware = (store: any) => (next: any) => (action: any) => {
         action.error = true;
         action.payload = res;
         if (res.status !== "701") {
+          message.error(res.msg);
         } else {
           window.location.href = `${window.location.origin}${window.location.pathname}`;
         }
