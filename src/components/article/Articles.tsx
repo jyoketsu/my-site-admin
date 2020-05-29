@@ -84,7 +84,6 @@ export default function Articles() {
       <PageHeader
         className="site-page-header"
         title="文章管理"
-        subTitle="This is a subtitle"
         extra={[
           <Button
             key="add-article"

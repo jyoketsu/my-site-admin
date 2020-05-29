@@ -46,7 +46,7 @@ export const category = (state = defaultState, action: any) => {
             break;
           }
         }
-        if (i) {
+        if (i !== undefined) {
           categories[i].name = action.name;
           categories[i].updateTime = new Date().getTime();
         }

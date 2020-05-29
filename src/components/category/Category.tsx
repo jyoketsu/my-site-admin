@@ -124,7 +124,6 @@ export default function Category() {
       <PageHeader
         className="site-page-header"
         title="类别管理"
-        subTitle="This is a subname"
         extra={[
           <Button
             key="add-article"

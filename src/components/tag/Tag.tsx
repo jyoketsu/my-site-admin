@@ -119,7 +119,7 @@ export default function TagManage() {
               setFields([
                 { name: ["_id"], value: record._id },
                 { name: ["name"], value: record.name },
-                { name: ["color"], value: undefined },
+                { name: ["color"], value: record.color },
               ]);
               setModalVisible(true);
             }}
@@ -140,7 +140,6 @@ export default function TagManage() {
       <PageHeader
         className="site-page-header"
         title="标签管理"
-        subTitle="This is a subname"
         extra={[
           <Button
             key="add-article"
@@ -229,7 +228,39 @@ export default function TagManage() {
               <Option value="#BC9F77">
                 <Tag color="#BC9F77">白茶</Tag>
               </Option>
-              Ï
+              <Option value="#2EA9DF">
+                <Tag color="#2EA9DF">露草</Tag>
+              </Option>
+              <Option value="#70649A">
+                <Tag color="#70649A">二藍</Tag>
+              </Option>
+              <Option value="#1B813E">
+                <Tag color="#1B813E">常磐</Tag>
+              </Option>
+              <Option value="#3A3226">
+                <Tag color="#3A3226">檳榔子染</Tag>
+              </Option>
+              <Option value="#9E7A7A">
+                <Tag color="#9E7A7A">梅鼠</Tag>
+              </Option>
+              <Option value="#62592C">
+                <Tag color="#62592C">海松茶</Tag>
+              </Option>
+              <Option value="#B5CAA0">
+                <Tag color="#B5CAA0">裏柳</Tag>
+              </Option>
+              <Option value="#F8C3CD">
+                <Tag color="#F8C3CD">退紅</Tag>
+              </Option>
+              <Option value="#A8497A">
+                <Tag color="#A8497A">梅紫</Tag>
+              </Option>
+              <Option value="#0D5661">
+                <Tag color="#0D5661">藍</Tag>
+              </Option>
+              <Option value="#69B0AC">
+                <Tag color="#69B0AC">青磁</Tag>
+              </Option>
             </Select>
           </Form.Item>
         </Form>

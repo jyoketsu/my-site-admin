@@ -41,7 +41,9 @@ export const tag = (state = defaultState, action: any) => {
             break;
           }
         }
-        if (i) {
+        console.log("---i---", i);
+
+        if (i !== undefined) {
           tags[i].name = action.name;
           tags[i].color = action.color;
           tags[i].updateTime = new Date().getTime();
