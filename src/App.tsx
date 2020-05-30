@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./App.less";
 import routers from "./routes/index";
 import Routes from "./routes/Routes";
 import { Link, useLocation } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Avatar } from "antd";
 import DocumentTitle from "react-document-title";
 const { Header, Content, Sider } = Layout;
 
@@ -49,10 +49,12 @@ function App() {
           </Menu>
         </Sider>
         <Layout id="layout-body">
-          <Header
-            className="site-layout-sub-header-background"
-            style={{ padding: 0 }}
-          ></Header>
+          <Header className="site-layout-sub-header-background admin-head">
+            <div className="admin-head-left"></div>
+            <div className="admin-head-right">
+              <Avatar>U</Avatar>
+            </div>
+          </Header>
           <Content
             style={{
               margin: "24px 16px 0",

@@ -15,6 +15,16 @@
 }
 .editor-head {
   height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+.editor-foot-left,
+.editor-foot-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .editor-body {
   flex: 1;
@@ -29,4 +39,10 @@
   overflow: auto;
   flex: 1;
   padding: 0 15px;
+}
+.aritcle-status {
+  position: relative;
+  padding: 0 16px;
+  color: #a6a6a6;
+  font-size: 13px;
 }

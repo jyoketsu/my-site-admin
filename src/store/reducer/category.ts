@@ -5,11 +5,16 @@ import {
   DELETE_CATEGORY,
 } from "../types";
 
-export interface Category {
-  categories: object[];
+interface Category {
+  _id: string;
+  name: string;
 }
 
-const defaultState: Category = {
+export interface CategoryReducer {
+  categories: Category[];
+}
+
+const defaultState: CategoryReducer = {
   categories: [],
 };
 

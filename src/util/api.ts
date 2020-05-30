@@ -73,10 +73,58 @@ const request = {
   },
 };
 const article = {
-  getArticles(current: number, pageSize: number) {
+  get(current: number, pageSize: number) {
     return request.get(API_URL + "/article", {
       current: current,
       pageSize: pageSize,
+    });
+  },
+  getById(_id: string) {
+    return request.get(API_URL + "/article/findById", {
+      _id: _id,
+    });
+  },
+  delete(_id: string) {
+    return request.delete(API_URL + "/article/delete", {
+      _id: _id,
+    });
+  },
+  add(
+    title: string,
+    cover: string,
+    content: string,
+    auth: string,
+    category: string,
+    tags: string[],
+    type: number
+  ) {
+    return request.post(API_URL + "/article/create", {
+      title: title,
+      cover: cover,
+      content: content,
+      auth: auth,
+      category: category,
+      tags: tags,
+      type: type,
+    });
+  },
+  update(
+    _id: string,
+    title: string,
+    cover: string,
+    content: string,
+    category: string,
+    tags: string[]
+  ) {
+    return request.post(API_URL + "/article/update", {
+      _id: _id,
+      updater: {
+        title: title,
+        content: content,
+        category: category,
+        tags: tags,
+        cover: cover,
+      },
     });
   },
 };

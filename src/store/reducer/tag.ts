@@ -1,10 +1,15 @@
 import { GET_TAGS, ADD_TAG, EDIT_TAG, DELETE_TAG } from "../types";
 
-export interface Tag {
-  tags: object[];
+interface Tag {
+  _id: string;
+  name: string;
+  color: string;
+}
+export interface TagReducer {
+  tags: Tag[];
 }
 
-const defaultState: Tag = {
+const defaultState: TagReducer = {
   tags: [],
 };
 
@@ -41,7 +46,6 @@ export const tag = (state = defaultState, action: any) => {
             break;
           }
         }
-        console.log("---i---", i);
 
         if (i !== undefined) {
           tags[i].name = action.name;

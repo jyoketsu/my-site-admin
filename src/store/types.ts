@@ -11,6 +11,7 @@ export const DELETE_ARTICLE = "DELETE_ARTICLE";
 export const EDIT_ARTICLE = "EDIT_ARTICLE";
 export const GET_ARTICLES = "GET_ARTICLES";
 export const GET_ARTICLE_BY_ID = "GET_ARTICLE_BY_ID";
+export const CLEAR_ARTICLE = "CLEAR_ARTICLE";
 
 // category
 export const ADD_CATEGORY = "ADD_CATEGORY";

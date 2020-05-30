@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <Switch>
       <Route exact path="/home/article" component={Articles} />
-      <Route path="/home/article/edit" component={Article} />
+      <Route path="/home/article/:id" component={Article} />
       <Redirect to="/404" />
     </Switch>
   );
