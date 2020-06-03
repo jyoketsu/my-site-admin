@@ -72,8 +72,10 @@ export default function Article() {
     let innerHtml;
     let cover: any = "";
     let title: string = "";
+    let snippet: string = "";
     let dom = document.getElementById("editor-preview");
     if (dom) {
+      // 获取title，既一个dom
       const firstNode: any = dom.childNodes[0];
       title = firstNode ? firstNode.innerHTML : "";
 
@@ -83,9 +85,20 @@ export default function Article() {
       if (arr) {
         const srcMatch = arr[0].match(srcReg);
         if (srcMatch) {
+          // 将第一个图片作为封面
           cover = srcMatch[1];
         }
       }
+
+      // 获取摘要
+      innerHtml = dom.innerHTML;
+      // 去除标签
+      innerHtml = innerHtml.replace(/<\/?.+?>/g, "");
+      innerHtml = innerHtml.replace(/&nbsp;/g, "");
+      // 去除标题
+      innerHtml = innerHtml.replace(title, "");
+      // 截取字符串得到摘要
+      snippet = innerHtml.substr(0, 100);
     }
 
     // 编辑
@@ -94,6 +107,7 @@ export default function Article() {
         article._id,
         title,
         cover,
+        snippet,
         input,
         category,
         tag
@@ -110,6 +124,7 @@ export default function Article() {
       const payload = api.article.add(
         title,
         cover,
+        snippet,
         input,
         "5ecb7b68e749d86cea7874fb",
         category,

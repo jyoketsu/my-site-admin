@@ -92,6 +92,7 @@ const article = {
   add(
     title: string,
     cover: string,
+    snippet: string,
     content: string,
     auth: string,
     category: string,
@@ -101,6 +102,7 @@ const article = {
     return request.post(API_URL + "/article/create", {
       title: title,
       cover: cover,
+      snippet: snippet,
       content: content,
       auth: auth,
       category: category,
@@ -112,6 +114,7 @@ const article = {
     _id: string,
     title: string,
     cover: string,
+    snippet: string,
     content: string,
     category: string,
     tags: string[]
@@ -124,6 +127,7 @@ const article = {
         category: category,
         tags: tags,
         cover: cover,
+        snippet: snippet,
       },
     });
   },
