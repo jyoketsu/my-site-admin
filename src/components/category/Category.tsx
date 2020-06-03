@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../store/reducer";
+import { useTypedSelector } from "../../redux/reducer";
 import api from "../../util/api";
 import {
   GET_CATEGORIES,
   ADD_CATEGORY,
   EDIT_CATEGORY,
   DELETE_CATEGORY,
-} from "../../store/types";
+} from "../../redux/types";
 import { PageHeader, Table, Button, Space, Modal, Form, Input } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import moment from "moment";

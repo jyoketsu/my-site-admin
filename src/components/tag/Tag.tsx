@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../store/reducer";
+import { useTypedSelector } from "../../redux/reducer";
 import api from "../../util/api";
-import { GET_TAGS, ADD_TAG, EDIT_TAG, DELETE_TAG } from "../../store/types";
+import { GET_TAGS, ADD_TAG, EDIT_TAG, DELETE_TAG } from "../../redux/types";
 import {
   PageHeader,
   Table,

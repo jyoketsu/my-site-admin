@@ -4,7 +4,7 @@ import "./index.css";
 import Pages from "./Pages";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import store from "./redux/store";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 

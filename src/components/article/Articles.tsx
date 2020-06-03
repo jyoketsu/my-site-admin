@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../store/reducer";
+import { useTypedSelector } from "../../redux/reducer";
 import api from "../../util/api";
-import { GET_ARTICLES, DELETE_ARTICLE } from "../../store/types";
+import { GET_ARTICLES, DELETE_ARTICLE } from "../../redux/types";
 import { PageHeader, Table, Button, Space, Modal, Tag } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import moment from "moment";

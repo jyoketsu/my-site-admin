@@ -5,7 +5,7 @@ import {
   LOGIN,
   LOGOUT,
   REGISTER,
-} from "../store/types";
+} from "../redux/types";
 import { message } from "antd";
 
 const promiseMiddleware = (store: any) => (next: any) => (action: any) => {

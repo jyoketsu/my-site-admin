@@ -7,10 +7,10 @@ import {
   EDIT_ARTICLE,
   GET_ARTICLE_BY_ID,
   CLEAR_ARTICLE,
-} from "../../store/types";
+} from "../../redux/types";
 import api from "../../util/api";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../store/reducer";
+import { useTypedSelector } from "../../redux/reducer";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Controlled as CodeMirror } from "react-codemirror2";
