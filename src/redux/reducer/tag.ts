@@ -1,4 +1,4 @@
-import { GET_TAGS, ADD_TAG, EDIT_TAG, DELETE_TAG } from "../types";
+import { actionTypes } from "../actions/tagActions";
 
 interface Tag {
   _id: string;
@@ -15,28 +15,21 @@ const defaultState: TagReducer = {
 
 export const tag = (state = defaultState, action: any) => {
   switch (action.type) {
-    case GET_TAGS:
-      if (!action.error) {
-        return {
-          ...state,
-          tags: action.payload.result,
-        };
-      } else {
-        return state;
-      }
-    case ADD_TAG:
-      if (!action.error) {
-        let tags = JSON.parse(JSON.stringify(state.tags));
-        tags.unshift(action.payload.result);
-        return {
-          ...state,
-          tags: tags,
-        };
-      } else {
-        return state;
-      }
-    case EDIT_TAG:
-      if (!action.error && action.payload.result.n) {
+    case actionTypes.GET_TAGS_SUCCEEDED:
+      return {
+        ...state,
+        tags: action.data.result,
+      };
+    case actionTypes.ADD_TAG_SUCCEEDED: {
+      let tags = JSON.parse(JSON.stringify(state.tags));
+      tags.unshift(action.data.result);
+      return {
+        ...state,
+        tags: tags,
+      };
+    }
+    case actionTypes.EDIT_TAG_SUCCEEDED:
+      if (action.data.result.n) {
         let tags = JSON.parse(JSON.stringify(state.tags));
         let i;
         for (let index = 0; index < tags.length; index++) {
@@ -59,25 +52,21 @@ export const tag = (state = defaultState, action: any) => {
       } else {
         return state;
       }
-    case DELETE_TAG:
-      if (!action.error) {
-        let tags = JSON.parse(JSON.stringify(state.tags));
-        let i;
-        for (let index = 0; index < tags.length; index++) {
-          const element = tags[index];
-          if (element._id === action._id) {
-            i = index;
-            break;
-          }
+    case actionTypes.DELETE_TAG_SUCCEEDED:
+      let tags = JSON.parse(JSON.stringify(state.tags));
+      let i;
+      for (let index = 0; index < tags.length; index++) {
+        const element = tags[index];
+        if (element._id === action._id) {
+          i = index;
+          break;
         }
-        tags.splice(i, 1);
-        return {
-          ...state,
-          tags: tags,
-        };
-      } else {
-        return state;
       }
+      tags.splice(i, 1);
+      return {
+        ...state,
+        tags: tags,
+      };
     default:
       return state;
   }

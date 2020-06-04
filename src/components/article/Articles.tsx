@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../redux/reducer";
-import api from "../../util/api";
-import { GET_ARTICLES, DELETE_ARTICLE } from "../../redux/types";
+import { useTypedSelector } from "../../redux/reducer/RootState";
+import { getArticles, deleteArticle } from "../../redux/actions/articleActions";
 import { PageHeader, Table, Button, Space, Modal, Tag } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import moment from "moment";
@@ -16,11 +15,7 @@ export default function Articles() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    function get(current: number, pageSize: number) {
-      const payload = api.article.get(current, pageSize);
-      dispatch({ type: GET_ARTICLES, payload: payload });
-    }
-    get(current, pageSize);
+    dispatch(getArticles(current, pageSize));
   }, [dispatch, current]);
 
   function deleteConfirm(record: any) {
@@ -29,8 +24,7 @@ export default function Articles() {
       icon: <ExclamationCircleOutlined />,
       content: `删除【${record.title}】`,
       onOk() {
-        const payload = api.article.delete(record._id);
-        dispatch({ type: DELETE_ARTICLE, _id: record._id, payload: payload });
+        dispatch(deleteArticle(record._id));
       },
     });
   }

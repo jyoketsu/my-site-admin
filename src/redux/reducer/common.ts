@@ -1,4 +1,6 @@
-import { ASYNC_START, ASYNC_END } from "../types";
+import { actionTypes as commonActionTypes } from "../actions/commonActions";
+import { actionTypes as articleActionTypes } from "../actions/articleActions";
+import { message } from "antd";
 
 export interface Common {
   loading: boolean;
@@ -10,12 +12,20 @@ const defaultState: Common = {
 
 export const common = (state = defaultState, action: any) => {
   switch (action.type) {
-    case ASYNC_START:
+    case articleActionTypes.GET_ARTICLES:
+    case articleActionTypes.EDIT_ARTICLE:
       return {
         ...state,
         loading: true,
       };
-    case ASYNC_END:
+    case commonActionTypes.FAILED:
+      message.error(action.error);
+      return {
+        ...state,
+        loading: false,
+      };
+    case articleActionTypes.GET_ARTICLES_SUCCEEDED:
+    case articleActionTypes.EDIT_ARTICLE_SUCCEEDED:
       return {
         ...state,
         loading: false,

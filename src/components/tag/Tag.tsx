@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../redux/reducer";
-import api from "../../util/api";
-import { GET_TAGS, ADD_TAG, EDIT_TAG, DELETE_TAG } from "../../redux/types";
+import { useTypedSelector } from "../../redux/reducer/RootState";
+import {
+  getTags,
+  deleteTag,
+  addTag,
+  editTag,
+} from "../../redux/actions/tagActions";
 import {
   PageHeader,
   Table,
@@ -33,11 +37,7 @@ export default function TagManage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    function getCategories() {
-      const payload = api.tag.getTags();
-      dispatch({ type: GET_TAGS, payload: payload });
-    }
-    getCategories();
+    dispatch(getTags());
   }, [dispatch]);
 
   function deleteConfirm(record: any) {
@@ -46,8 +46,7 @@ export default function TagManage() {
       icon: <ExclamationCircleOutlined />,
       content: `删除【${record.name}】`,
       onOk() {
-        const payload = api.tag.deleteTag(record._id);
-        dispatch({ type: DELETE_TAG, _id: record._id, payload: payload });
+        dispatch(deleteTag(record._id));
       },
     });
   }
@@ -60,17 +59,9 @@ export default function TagManage() {
         const name = form.getFieldValue("name");
         const color = form.getFieldValue("color");
         if (_id) {
-          const payload = api.tag.editTag(_id, name, color);
-          dispatch({
-            type: EDIT_TAG,
-            _id: _id,
-            name: name,
-            color: color,
-            payload: payload,
-          });
+          dispatch(editTag(_id, name, color));
         } else {
-          const payload = api.tag.createTag(name, color);
-          dispatch({ type: ADD_TAG, payload: payload });
+          dispatch(addTag(name, color));
         }
         setModalVisible(false);
         form.resetFields();

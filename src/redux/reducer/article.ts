@@ -1,11 +1,4 @@
-import {
-  GET_ARTICLES,
-  DELETE_ARTICLE,
-  ADD_ARTICLE,
-  GET_ARTICLE_BY_ID,
-  EDIT_ARTICLE,
-  CLEAR_ARTICLE,
-} from "../types";
+import { actionTypes } from "../actions/articleActions";
 
 interface Article {
   _id: string;
@@ -42,58 +35,46 @@ const defaultState: ArticleReducer = {
 
 export const article = (state = defaultState, action: any) => {
   switch (action.type) {
-    case GET_ARTICLES:
-      if (!action.error) {
-        return {
-          ...state,
-          articles: action.payload.result.array,
-          total: action.payload.result.count,
-        };
-      } else {
-        return state;
-      }
-    case DELETE_ARTICLE:
-      if (!action.error) {
-        let articles = JSON.parse(JSON.stringify(state.articles));
-        let i;
-        for (let index = 0; index < articles.length; index++) {
-          const element = articles[index];
-          if (element._id === action._id) {
-            i = index;
-            break;
-          }
+    case actionTypes.GET_ARTICLES_SUCCEEDED: {
+      return {
+        ...state,
+        articles: action.data.result.array,
+        total: action.data.result.count,
+      };
+    }
+    case actionTypes.DELETE_ARTICLE_SUCCEEDED: {
+      let articles = JSON.parse(JSON.stringify(state.articles));
+      let i;
+      for (let index = 0; index < articles.length; index++) {
+        const element = articles[index];
+        if (element._id === action._id) {
+          i = index;
+          break;
         }
-        articles.splice(i, 1);
-        return {
-          ...state,
-          articles: articles,
-          total: state.total - 1,
-        };
-      } else {
-        return state;
       }
-    case ADD_ARTICLE:
-      if (!action.error) {
-        // let articles = JSON.parse(JSON.stringify(state.articles));
-        // articles.unshift(action.payload.result);
-        return {
-          ...state,
-          // articles: articles,
-        };
-      } else {
-        return state;
-      }
-    case GET_ARTICLE_BY_ID:
-      if (!action.error) {
-        return {
-          ...state,
-          article: action.payload.result,
-        };
-      } else {
-        return state;
-      }
-    case EDIT_ARTICLE:
-      if (!action.error && action.payload.result.n) {
+      articles.splice(i, 1);
+      return {
+        ...state,
+        articles: articles,
+        total: state.total - 1,
+      };
+    }
+    case actionTypes.ADD_ARTICLE_SUCCEEDED: {
+      // let articles = JSON.parse(JSON.stringify(state.articles));
+      // articles.unshift(action.data.result);
+      return {
+        ...state,
+        // articles: articles,
+      };
+    }
+    case actionTypes.GET_ARTICLE_BY_ID_SUCCEEDED: {
+      return {
+        ...state,
+        article: action.data.result,
+      };
+    }
+    case actionTypes.EDIT_ARTICLE_SUCCEEDED:
+      if (action.data.result.n) {
         let article = JSON.parse(JSON.stringify(state.article));
         article = {
           ...article,
@@ -111,7 +92,7 @@ export const article = (state = defaultState, action: any) => {
       } else {
         return state;
       }
-    case CLEAR_ARTICLE:
+    case actionTypes.CLEAR_ARTICLE:
       return {
         ...state,
         article: {

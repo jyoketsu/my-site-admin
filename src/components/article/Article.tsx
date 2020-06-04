@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Article.css";
 import {
-  GET_CATEGORIES,
-  GET_TAGS,
-  ADD_ARTICLE,
-  EDIT_ARTICLE,
-  GET_ARTICLE_BY_ID,
-  CLEAR_ARTICLE,
-} from "../../redux/types";
-import api from "../../util/api";
+  clearArticle,
+  getArticleById,
+  editArticle,
+  addArticle,
+} from "../../redux/actions/articleActions";
+import { getCategories } from "../../redux/actions/categoryAction";
+import { getTags } from "../../redux/actions/tagActions";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../redux/reducer";
+import { useTypedSelector } from "../../redux/reducer/RootState";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Controlled as CodeMirror } from "react-codemirror2";
@@ -38,18 +37,15 @@ export default function Article() {
   useEffect(() => {
     // 获取文章内容
     if (id && id !== "new") {
-      const aritlcePayload = api.article.getById(id);
-      dispatch({ type: GET_ARTICLE_BY_ID, payload: aritlcePayload });
+      dispatch(getArticleById(id));
     }
     // 获取类别
-    const catePayload = api.category.getCategories();
-    dispatch({ type: GET_CATEGORIES, payload: catePayload });
+    dispatch(getCategories());
     // 获取标签
-    const tagPayload = api.tag.getTags();
-    dispatch({ type: GET_TAGS, payload: tagPayload });
+    dispatch(getTags());
 
     return () => {
-      dispatch({ type: CLEAR_ARTICLE });
+      dispatch(clearArticle());
     };
   }, [id, dispatch]);
 
@@ -103,35 +99,23 @@ export default function Article() {
 
     // 编辑
     if (article._id) {
-      const payload = api.article.update(
-        article._id,
-        title,
-        cover,
-        snippet,
-        input,
-        category,
-        tag
+      dispatch(
+        editArticle(article._id, title, cover, snippet, input, category, tag)
       );
-      dispatch({
-        type: EDIT_ARTICLE,
-        content: input,
-        category,
-        tag: tag,
-        payload: payload,
-      });
     } else {
       // 新增
-      const payload = api.article.add(
-        title,
-        cover,
-        snippet,
-        input,
-        "5ecb7b68e749d86cea7874fb",
-        category,
-        tag,
-        1
+      dispatch(
+        addArticle(
+          title,
+          cover,
+          snippet,
+          input,
+          "5ecb7b68e749d86cea7874fb",
+          category,
+          tag,
+          1
+        )
       );
-      dispatch({ type: ADD_ARTICLE, payload: payload });
     }
     dom = null;
     innerHtml = null;

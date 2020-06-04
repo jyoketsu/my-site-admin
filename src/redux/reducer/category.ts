@@ -1,9 +1,4 @@
-import {
-  GET_CATEGORIES,
-  ADD_CATEGORY,
-  EDIT_CATEGORY,
-  DELETE_CATEGORY,
-} from "../types";
+import { actionTypes } from "../actions/categoryAction";
 
 interface Category {
   _id: string;
@@ -20,28 +15,22 @@ const defaultState: CategoryReducer = {
 
 export const category = (state = defaultState, action: any) => {
   switch (action.type) {
-    case GET_CATEGORIES:
-      if (!action.error) {
-        return {
-          ...state,
-          categories: action.payload.result,
-        };
-      } else {
-        return state;
-      }
-    case ADD_CATEGORY:
-      if (!action.error) {
-        let categories = JSON.parse(JSON.stringify(state.categories));
-        categories.unshift(action.payload.result);
-        return {
-          ...state,
-          categories: categories,
-        };
-      } else {
-        return state;
-      }
-    case EDIT_CATEGORY:
-      if (!action.error && action.payload.result.n) {
+    case actionTypes.GET_CATEGORIES_SUCCEEDED: {
+      return {
+        ...state,
+        categories: action.data.result,
+      };
+    }
+    case actionTypes.ADD_CATEGORY_SUCCEEDED: {
+      let categories = JSON.parse(JSON.stringify(state.categories));
+      categories.unshift(action.data.result);
+      return {
+        ...state,
+        categories: categories,
+      };
+    }
+    case actionTypes.EDIT_CATEGORY_SUCCEEDED:
+      if (action.data.result.n) {
         let categories = JSON.parse(JSON.stringify(state.categories));
         let i;
         for (let index = 0; index < categories.length; index++) {
@@ -62,25 +51,22 @@ export const category = (state = defaultState, action: any) => {
       } else {
         return state;
       }
-    case DELETE_CATEGORY:
-      if (!action.error) {
-        let categories = JSON.parse(JSON.stringify(state.categories));
-        let i;
-        for (let index = 0; index < categories.length; index++) {
-          const element = categories[index];
-          if (element._id === action._id) {
-            i = index;
-            break;
-          }
+    case actionTypes.DELETE_CATEGORY_SUCCEEDED: {
+      let categories = JSON.parse(JSON.stringify(state.categories));
+      let i;
+      for (let index = 0; index < categories.length; index++) {
+        const element = categories[index];
+        if (element._id === action._id) {
+          i = index;
+          break;
         }
-        categories.splice(i, 1);
-        return {
-          ...state,
-          categories: categories,
-        };
-      } else {
-        return state;
       }
+      categories.splice(i, 1);
+      return {
+        ...state,
+        categories: categories,
+      };
+    }
     default:
       return state;
   }

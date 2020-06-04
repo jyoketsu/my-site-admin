@@ -1,8 +1,8 @@
 import { useSelector, TypedUseSelectorHook } from "react-redux";
-import { ArticleReducer } from "./reducer/article";
-import { Common } from "./reducer/common";
-import { CategoryReducer } from "./reducer/category";
-import { TagReducer } from "./reducer/tag";
+import { ArticleReducer } from "./article";
+import { Common } from "./common";
+import { CategoryReducer } from "./category";
+import { TagReducer } from "./tag";
 
 interface RootState {
   common: Common;

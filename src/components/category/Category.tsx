@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../redux/reducer";
-import api from "../../util/api";
+import { useTypedSelector } from "../../redux/reducer/RootState";
 import {
-  GET_CATEGORIES,
-  ADD_CATEGORY,
-  EDIT_CATEGORY,
-  DELETE_CATEGORY,
-} from "../../redux/types";
+  getCategories,
+  deleteCategory,
+  editCategory,
+  addCategory,
+} from "../../redux/actions/categoryAction";
 import { PageHeader, Table, Button, Space, Modal, Form, Input } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import moment from "moment";
@@ -26,11 +25,7 @@ export default function Category() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    function getCategories() {
-      const payload = api.category.getCategories();
-      dispatch({ type: GET_CATEGORIES, payload: payload });
-    }
-    getCategories();
+    dispatch(getCategories());
   }, [dispatch]);
 
   function deleteConfirm(record: any) {
@@ -39,8 +34,7 @@ export default function Category() {
       icon: <ExclamationCircleOutlined />,
       content: `删除【${record.name}】`,
       onOk() {
-        const payload = api.category.deleteCategory(record._id);
-        dispatch({ type: DELETE_CATEGORY, _id: record._id, payload: payload });
+        dispatch(deleteCategory(record._id));
       },
     });
   }
@@ -52,16 +46,9 @@ export default function Category() {
         const _id = form.getFieldValue("_id");
         const name = form.getFieldValue("name");
         if (_id) {
-          const payload = api.category.editCategory(_id, name);
-          dispatch({
-            type: EDIT_CATEGORY,
-            _id: _id,
-            name: name,
-            payload: payload,
-          });
+          dispatch(editCategory(_id, name));
         } else {
-          const payload = api.category.createCategory(name);
-          dispatch({ type: ADD_CATEGORY, payload: payload });
+          dispatch(addCategory(name));
         }
         setModalVisible(false);
         form.resetFields();
