@@ -40,7 +40,7 @@ export default function Articles() {
       dataIndex: "category",
       key: "category",
       width: 120,
-      render: (value: any) => value.name,
+      render: (value: any) => (value ? value.name : ""),
     },
     {
       title: "标签",

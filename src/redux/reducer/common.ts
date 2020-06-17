@@ -19,7 +19,9 @@ export const common = (state = defaultState, action: any) => {
         loading: true,
       };
     case commonActionTypes.FAILED:
-      message.error(action.error);
+      message.error(
+        action.error.error ? action.error.error.message : action.error.msg
+      );
       return {
         ...state,
         loading: false,

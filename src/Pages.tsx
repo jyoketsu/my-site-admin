@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.less";
 import Loadable from "react-loadable";
 import Loading from "./components/common/Loading";
 import {

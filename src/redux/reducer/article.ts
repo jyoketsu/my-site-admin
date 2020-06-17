@@ -60,11 +60,12 @@ export const article = (state = defaultState, action: any) => {
       };
     }
     case actionTypes.ADD_ARTICLE_SUCCEEDED: {
-      // let articles = JSON.parse(JSON.stringify(state.articles));
-      // articles.unshift(action.data.result);
+      let articles = JSON.parse(JSON.stringify(state.articles));
+      articles.unshift(action.data.result);
       return {
         ...state,
-        // articles: articles,
+        articles: articles,
+        article: action.data.result,
       };
     }
     case actionTypes.GET_ARTICLE_BY_ID_SUCCEEDED: {

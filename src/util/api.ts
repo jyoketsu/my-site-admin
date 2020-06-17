@@ -1,9 +1,9 @@
 import axios from "axios";
 const API_URL = "http://106.53.222.64:8099";
-let token: string = "fafeafa123456";
+let token: string | null = localStorage.getItem("auth-token");
 
 const request = {
-  get(path: string, params: object) {
+  get(path: string, params?: object) {
     return new Promise(async function (resolve, reject) {
       try {
         const response = await axios({
@@ -20,7 +20,7 @@ const request = {
       }
     });
   },
-  post(path: string, params: object) {
+  post(path: string, params?: object) {
     return new Promise(async function (resolve, reject) {
       try {
         const response = await axios({
@@ -37,7 +37,7 @@ const request = {
       }
     });
   },
-  patch(path: string, params: object) {
+  patch(path: string, params?: object) {
     return new Promise(async function (resolve, reject) {
       try {
         const response = await axios({
@@ -54,7 +54,7 @@ const request = {
       }
     });
   },
-  delete(path: string, params: object) {
+  delete(path: string, params?: object) {
     return new Promise(async function (resolve, reject) {
       try {
         const response = await axios({
@@ -70,6 +70,23 @@ const request = {
         reject(error);
       }
     });
+  },
+};
+const auth = {
+  login(username: string, password: string) {
+    return request.get(API_URL + "/user/login", {
+      username: username,
+      password: password,
+    });
+  },
+  register(username: string, password: string) {
+    return request.post(API_URL + "/user/register", {
+      username: username,
+      password: password,
+    });
+  },
+  loginByToken() {
+    return request.get(API_URL + "/user/loginByToken");
   },
 };
 const article = {
@@ -179,12 +196,13 @@ const tag = {
 };
 
 export default {
+  auth,
   request,
   article,
   category,
   tag,
   setToken: (_token: string) => {
-    window.localStorage.setItem("TOKEN", _token);
+    window.localStorage.setItem("auth_token", _token);
     token = _token;
   },
 };

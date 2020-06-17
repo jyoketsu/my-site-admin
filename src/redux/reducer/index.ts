@@ -3,8 +3,10 @@ import { article } from "./article";
 import { common } from "./common";
 import { category } from "./category";
 import { tag } from "./tag";
+import { auth } from "./auth";
 
 export const rootReducer = combineReducers({
+  auth: auth,
   common: common,
   article: article,
   category: category,

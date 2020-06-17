@@ -1,15 +1,28 @@
-import React, { useState } from "react";
-import "./App.less";
+import React, { useState, useEffect } from "react";
 import routers from "./routes/index";
 import Routes from "./routes/Routes";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { Layout, Menu, Avatar } from "antd";
 import DocumentTitle from "react-document-title";
+import { useDispatch } from "react-redux";
+import { loginByToken } from "./redux/actions/authActions";
 const { Header, Content, Sider } = Layout;
 
 function App() {
-  let location = useLocation();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
   const [title, setTitle] = useState(routers[0].name);
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    if (token) {
+      // 获取用户信息
+      dispatch(loginByToken());
+    } else {
+      history.push("/login");
+    }
+  }, [history, dispatch]);
 
   function selectedKey(routers: any) {
     for (let index = 0; index < routers.length; index++) {
