@@ -2,10 +2,12 @@ import { actionTypes } from "../actions/authActions";
 
 export interface AuthType {
   user: any;
+  expired: boolean;
 }
 
 const defaultState: AuthType = {
   user: null,
+  expired: false,
 };
 
 export const auth = (state = defaultState, action: any) => {
@@ -14,11 +16,24 @@ export const auth = (state = defaultState, action: any) => {
       return {
         ...state,
         user: action.data.result,
+        expired: false,
+      };
+    case actionTypes.LOGIN_FAILED:
+      return {
+        ...state,
+        expired: true,
       };
     case actionTypes.REGISTER_SUCCEEDED:
       return {
         ...state,
         user: action.data.result,
+        expired: false,
+      };
+    case actionTypes.LOGOUT:
+      window.localStorage.clear();
+      return {
+        ...state,
+        expired: true,
       };
     default:
       return state;

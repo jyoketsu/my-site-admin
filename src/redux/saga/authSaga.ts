@@ -4,6 +4,7 @@ import {
   loginSuccess,
   registerSuccess,
   loginByTokenSuccess,
+  loginFailed,
 } from "../actions/authActions";
 import { Failed } from "../actions/commonActions";
 import api from "../../util/api";
@@ -42,10 +43,10 @@ function* loginByToken(action: any) {
     if (res.status === 200) {
       yield put(loginByTokenSuccess(res));
     } else {
-      yield put(Failed(res));
+      yield put(loginFailed());
     }
   } catch (e) {
-    yield put(Failed(e));
+    yield put(loginFailed());
   }
 }
 

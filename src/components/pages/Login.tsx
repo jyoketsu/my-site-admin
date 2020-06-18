@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import DocumentTitle from "react-document-title";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login, register } from "../../redux/actions/authActions";
 import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../redux/reducer/RootState";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isRegister, setIsRegister] = useState(false);
+  const user = useTypedSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (user && user._id) {
+      history.push("/");
+    }
+  }, [user, history]);
+
   const onFinish = (values: any) => {
     if (isRegister) {
       dispatch(register(values.username, values.password));

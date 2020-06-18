@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import routers from "./routes/index";
 import Routes from "./routes/Routes";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { Layout, Menu, Avatar } from "antd";
+import { Layout, Menu } from "antd";
 import DocumentTitle from "react-document-title";
 import { useDispatch } from "react-redux";
 import { loginByToken } from "./redux/actions/authActions";
+import { useTypedSelector } from "./redux/reducer/RootState";
+import Avatar from "./components/user/Avatar";
 const { Header, Content, Sider } = Layout;
 
 function App() {
@@ -13,9 +15,10 @@ function App() {
   const history = useHistory();
   const location = useLocation();
   const [title, setTitle] = useState(routers[0].name);
+  const expired = useTypedSelector((state) => state.auth.expired);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth-token");
+    const token = localStorage.getItem("auth_token");
     if (token) {
       // 获取用户信息
       dispatch(loginByToken());
@@ -23,6 +26,12 @@ function App() {
       history.push("/login");
     }
   }, [history, dispatch]);
+
+  useEffect(() => {
+    if (expired) {
+      history.push("/login");
+    }
+  }, [expired, history]);
 
   function selectedKey(routers: any) {
     for (let index = 0; index < routers.length; index++) {
@@ -65,7 +74,7 @@ function App() {
           <Header className="site-layout-sub-header-background admin-head">
             <div className="admin-head-left"></div>
             <div className="admin-head-right">
-              <Avatar>U</Avatar>
+              <Avatar />
             </div>
           </Header>
           <Content

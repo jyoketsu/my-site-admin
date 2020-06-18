@@ -1,6 +1,7 @@
 export const actionTypes = {
   LOGIN: "LOGIN",
   LOGIN_SUCCEEDED: "LOGIN_SUCCEEDED",
+  LOGIN_FAILED: "LOGIN_FAILED",
   LOGOUT: "LOGOUT",
   REGISTER: "REGISTER",
   REGISTER_SUCCEEDED: "REGISTER_SUCCEEDED",
@@ -13,6 +14,12 @@ export function login(username: string, password: string) {
     type: actionTypes.LOGIN,
     username: username,
     password: password,
+  };
+}
+
+export function loginFailed() {
+  return {
+    type: actionTypes.LOGIN_FAILED,
   };
 }
 
@@ -48,5 +55,11 @@ export function loginByTokenSuccess(data: any) {
   return {
     type: actionTypes.LOGIN_BY_TOKEN_SUCCEEDED,
     data,
+  };
+}
+
+export function logout() {
+  return {
+    type: actionTypes.LOGOUT,
   };
 }

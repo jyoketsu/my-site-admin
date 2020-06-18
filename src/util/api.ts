@@ -1,6 +1,6 @@
 import axios from "axios";
 const API_URL = "http://106.53.222.64:8099";
-let token: string | null = localStorage.getItem("auth-token");
+let token: string | null = localStorage.getItem("auth_token");
 
 const request = {
   get(path: string, params?: object) {
@@ -11,7 +11,7 @@ const request = {
           url: path,
           params: params,
           headers: {
-            "Auth-Token": token,
+            token: token,
           },
         });
         resolve(response.data);
@@ -28,7 +28,7 @@ const request = {
           url: path,
           data: params,
           headers: {
-            "Auth-Token": token,
+            token: token,
           },
         });
         resolve(response.data);
@@ -45,7 +45,7 @@ const request = {
           url: path,
           data: params,
           headers: {
-            "Auth-Token": token,
+            token: token,
           },
         });
         resolve(response.data);
@@ -62,7 +62,7 @@ const request = {
           url: path,
           data: params,
           headers: {
-            "Auth-Token": token,
+            token: token,
           },
         });
         resolve(response.data);
