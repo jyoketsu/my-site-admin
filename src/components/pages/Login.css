@@ -22,3 +22,8 @@
 .login-form-button {
   width: 100%;
 }
+.ICP-licensing {
+  /* color: #fff; */
+  position: absolute;
+  bottom: 15px;
+}

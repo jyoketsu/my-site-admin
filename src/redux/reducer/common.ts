@@ -20,7 +20,9 @@ export const common = (state = defaultState, action: any) => {
       };
     case commonActionTypes.FAILED:
       message.error(
-        action.error.error ? action.error.error.message : action.error.msg
+        action.error.error
+          ? action.error.error.message || action.error.msg
+          : action.error.msg
       );
       return {
         ...state,

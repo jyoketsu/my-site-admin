@@ -104,6 +104,16 @@ export default function Login() {
             </Form.Item>
           </Form>
         </div>
+        <div className="ICP-licensing">
+          ©2020 Jyoketsu All Rights Reserved{" "}
+          <span
+            onClick={() =>
+              window.open("http://www.beian.miit.gov.cn", "_blank")
+            }
+          >
+            苏ICP备20038833号
+          </span>
+        </div>
       </div>
     </DocumentTitle>
   );

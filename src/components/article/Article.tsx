@@ -94,7 +94,7 @@ export default function Article() {
       // 去除标题
       innerHtml = innerHtml.replace(title, "");
       // 截取字符串得到摘要
-      snippet = innerHtml.substr(0, 100);
+      snippet = innerHtml.substr(0, 200);
     }
 
     // 编辑

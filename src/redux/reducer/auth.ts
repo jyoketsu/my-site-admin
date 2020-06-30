@@ -13,6 +13,7 @@ const defaultState: AuthType = {
 export const auth = (state = defaultState, action: any) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCEEDED:
+    case actionTypes.LOGIN_BY_TOKEN_SUCCEEDED:
       return {
         ...state,
         user: action.data.result,
