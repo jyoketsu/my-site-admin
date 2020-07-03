@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "http://106.53.222.64:8099";
+// const API_URL = "http://106.53.222.64:8099";
+const API_URL = "https://service.jyoketsu.com";
 let token: string | null = localStorage.getItem("auth_token");
 
 const request = {
