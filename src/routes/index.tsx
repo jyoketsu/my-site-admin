@@ -60,6 +60,16 @@ let config = [
     }),
     icon: <UserOutlined />,
   },
+  {
+    name: "系统服务",
+    path: "/home/service",
+    exact: false,
+    component: Loadable({
+      loader: () => import("../components/pages/Service"),
+      loading: () => <Loading />,
+    }),
+    icon: <UserOutlined />,
+  },
 ];
 
 export default config;

@@ -5,7 +5,7 @@ export default function Loading() {
     <div
       className="loading-wrapper"
       style={{
-        position: "fixed",
+        position: "absolute",
         top: 0,
         right: 0,
         bottom: 0,

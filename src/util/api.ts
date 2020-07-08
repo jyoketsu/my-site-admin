@@ -196,12 +196,21 @@ const tag = {
   },
 };
 
+const system = {
+  pm2Reload(name: string) {
+    return request.post(API_URL + "/system/reloadpm2", {
+      name: name,
+    });
+  },
+};
+
 export default {
   auth,
   request,
   article,
   category,
   tag,
+  system,
   setToken: (_token: string) => {
     window.localStorage.setItem("auth_token", _token);
     token = _token;

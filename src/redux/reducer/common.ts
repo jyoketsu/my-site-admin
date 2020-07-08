@@ -1,5 +1,6 @@
 import { actionTypes as commonActionTypes } from "../actions/commonActions";
 import { actionTypes as articleActionTypes } from "../actions/articleActions";
+import { actionTypes as systemActionTypes } from "../actions/systemActions";
 import { message } from "antd";
 
 export interface Common {
@@ -14,6 +15,7 @@ export const common = (state = defaultState, action: any) => {
   switch (action.type) {
     case articleActionTypes.GET_ARTICLES:
     case articleActionTypes.EDIT_ARTICLE:
+    case systemActionTypes.RELOAD_PM2:
       return {
         ...state,
         loading: true,
@@ -30,6 +32,7 @@ export const common = (state = defaultState, action: any) => {
       };
     case articleActionTypes.GET_ARTICLES_SUCCEEDED:
     case articleActionTypes.EDIT_ARTICLE_SUCCEEDED:
+    case systemActionTypes.RELOAD_PM2_SUCCEEDED:
       return {
         ...state,
         loading: false,

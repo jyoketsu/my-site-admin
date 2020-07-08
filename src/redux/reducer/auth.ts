@@ -34,6 +34,7 @@ export const auth = (state = defaultState, action: any) => {
       window.localStorage.clear();
       return {
         ...state,
+        user: null,
         expired: true,
       };
     default:

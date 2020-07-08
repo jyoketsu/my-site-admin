@@ -81,7 +81,6 @@ function App() {
             style={{
               margin: "24px 16px 0",
               minHeight: "unset",
-              position: "relative",
             }}
           >
             <Routes />
