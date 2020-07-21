@@ -142,6 +142,7 @@ export default function Article() {
         <div className="editor-preview" id="editor-preview">
           <ReactMarkdown
             source={input}
+            skipHtml={false}
             escapeHtml={false}
             renderers={{ code: CodeBlock }}
           />
